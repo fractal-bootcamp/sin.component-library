@@ -7,9 +7,14 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  icon?: string;
   tooltip?: string;
   children?: string;
+  width?: number;
+  height?: number;
+  icon?: string;
+  iconPosition?: 'left' | 'right'
+  iconWidth?: number;
+  iconHeight?: number;
 };
 const Button = (props: ButtonProps) => {
   const {
@@ -17,21 +22,34 @@ const Button = (props: ButtonProps) => {
     size = 'medium',
     text = 'Button',
     disabled = false,
-    // loading = false,
+    loading = false,
     onClick,
-    // icon,
-    // tooltip,
-    children
+    tooltip,
+    children,
+    height,
+    width,
+    icon,
+    iconPosition = 'left',
+    iconWidth,
+    iconHeight,
   } = props;
 
-  const className = [styles.button].join(' ');
+  const htmlButtonClassNames = [styles.button, styles[style], styles[size]];
+  if (iconPosition === 'right') htmlButtonClassNames.push(styles.reverse);
+  if (loading) htmlButtonClassNames.push(styles.loading);
+  const htmlButtonClassName = htmlButtonClassNames.join(' ');
+  const htmlButtonProps = {className: htmlButtonClassName, onClick, disabled: disabled || loading, title: tooltip};
+  const htmlButtonStyle = {width: width ? width : undefined, height: height ? height : undefined};
 
-  const htmlButtonProps = {className, onClick, disabled};
+  const iconElementClassNames = [styles.icon, styles[size]];
+  if (disabled || loading) iconElementClassNames.push(styles.iconDisabled);
+  const iconElementClassName = iconElementClassNames.join(' ');
+  const iconElementStyle = {width: iconWidth ? iconWidth : undefined, height: iconHeight ? iconHeight : undefined}
+  const iconElement = icon ? <img className={iconElementClassName} style={iconElementStyle} src={icon}/> : <></>
 
   return (
     <>
-      <button {...htmlButtonProps}>{children ?? text}</button>
-      {/* <button>{children ?? text}</button> */}
+      <button {...htmlButtonProps} style={htmlButtonStyle}>{iconElement}{children ?? text}</button>
     </>
   )
 };
