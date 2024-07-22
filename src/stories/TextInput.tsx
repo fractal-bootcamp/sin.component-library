@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+//import "./textInput.css";
+import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import TitleIcon from "@mui/icons-material/Title";
 interface TextInputProps {
   placeholder: string;
   isDisabled: boolean;
-  isPassword: boolean;
+  //isPassword: boolean;
   //prefixIcon: React.ReactNode; //likely an icon in a div
   //suffixIcon: React.ReactNode; //likely an icon in a div
 }
@@ -13,7 +14,7 @@ interface TextInputProps {
 const TextInput = ({
   placeholder,
   isDisabled,
-  isPassword,
+  //isPassword,
   //prefixIcon,
   //suffixIcon,
 }: TextInputProps) => {
@@ -21,19 +22,30 @@ const TextInput = ({
   const isValid = !/[0-9]/.test(value); //derived state
 
   return (
-    <div className="relative">
-      <input
-        //prefix={prefixIcon}
-        //suffix={suffixIcon}
-        type={isPassword ? "password" : "text"}
+    <div
+      style={{
+        border: "1px solid black",
+        display: "flex",
+        width: "max-content",
+      }}
+    >
+      <TitleIcon />
+      <textarea
+        //type={isPassword ? "password" : "text"}
         value={value}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
         disabled={isDisabled}
         className={`${isValid ? "bg-green-500" : "bg-red-500"}`}
+        style={{
+          width: "200px",
+          height: "200px",
+          lineHeight: "36px",
+        }}
       />
-      <TitleIcon className="absolute left-0 top-0" />
-      <KeyboardReturnIcon className="absolute right-0 top-0" />
+      <KeyboardReturnIcon
+        style={{ marginLeft: "-30px", paddingTop: "180px" }}
+      />
     </div>
   );
 };
@@ -42,17 +54,20 @@ export default TextInput;
 
 // - Placeholder text (done)
 // - Value and onChange handler (done)
-// - Toggle hidden password option (done)
 // - Disabled state (done)
+
+// - Toggle hidden password option (done)
 
 // - Validation states (error, success) (done)
 
-// - Prefix and suffix icons (in progress)
+// - Prefix and suffix icons (done)
 
 // - Popover info icon  (in progress)
-
-// - thus these have to be css
 
 // - Focus animation with border color change and slight shadow. (in progress)
 
 // - Shake animation on validation error. (in progress)
+
+// - Why props?
+// - If we use props, how does it make sense that we have to pass the placeholdername into props? (perhaps it does make sebse)
+//
