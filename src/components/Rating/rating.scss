@@ -1,0 +1,27 @@
+input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 5px;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.star.hovered,
+.star.hovered ~ .star {
+  color: #ffc107 !important; /* Color for hovered and preceding stars */
+}
+
+.halfstar {
+  cursor: pointer;
+  font-size: 2rem;
+  position: relative;
+  display: inline-block; /* Ensure inline-block for width calculation */
+  background: linear-gradient(to right, yellow 50%, transparent 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Hide the text initially */
+}
