@@ -15,7 +15,7 @@ const meta: Meta<typeof TooltipStorybook> = {
 export const Primary: StoryObj<typeof TooltipStorybook> = {
   args: {
     position: 'bottom',
-    text: '',
+    text: 'Tooltip',
     maxWidth: 360,
     delay: 500,
     focused: false,
