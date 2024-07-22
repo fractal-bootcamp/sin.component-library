@@ -1,3 +1,5 @@
+import styles from './button.module.sass';
+
 interface ButtonProps {
   style?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
@@ -22,13 +24,14 @@ const Button = (props: ButtonProps) => {
     children
   } = props;
 
-  const className = ['button', style, size].join(' ');
+  const className = [styles.button].join(' ');
 
   const htmlButtonProps = {className, onClick, disabled};
 
   return (
     <>
       <button {...htmlButtonProps}>{children ?? text}</button>
+      {/* <button>{children ?? text}</button> */}
     </>
   )
 };
