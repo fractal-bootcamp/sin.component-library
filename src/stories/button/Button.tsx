@@ -26,21 +26,23 @@ const Button = (props: ButtonProps) => {
     iconPosition = 'left',
   } = props;
 
-  const initialClassesBtn = [styles.button, styles[style], styles[size]];
-  if (iconPosition === 'right') initialClassesBtn.push(styles.reverse);
-  if (loading) initialClassesBtn.push(styles.loading);
-  const finalClassesBtn = initialClassesBtn.join(' ');
+  // Constructing button props
+  const classNameButtonArray = [styles.button, styles[style], styles[size]];
+  if (iconPosition === 'right') classNameButtonArray.push(styles.reverse);
+  if (loading) classNameButtonArray.push(styles.loading);
+  const classNameButton = classNameButtonArray.join(' ');
   const htmlButtonProps = {
-    className: finalClassesBtn,
+    className: classNameButton,
     onClick,
     disabled: disabled || loading,
     title: tooltip
   };
 
-  const iconElementClassNames = [styles.icon, styles[size]];
-  if (disabled || loading) iconElementClassNames.push(styles.disabled);
-  const iconElementClassName = iconElementClassNames.join(' ');
-  const iconElement = iconUrl ? <img className={iconElementClassName} src={iconUrl}/> : <></>
+  // Constructing icon element
+  const classNameIconArray = [styles.icon, styles[size]];
+  if (disabled || loading) classNameIconArray.push(styles.disabled);
+  const classNameIcon = classNameIconArray.join(' ');
+  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>
 
   return (
     <>
