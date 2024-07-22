@@ -1,37 +1,52 @@
 import styles from './button.module.sass';
 
-interface ButtonProps {
-  style?: 'primary' | 'secondary' | 'tertiary';
-  size?: 'small' | 'medium' | 'large';
+export interface ButtonProps {
   text?: string;
   disabled?: boolean;
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  icon?: string;
   tooltip?: string;
   children?: string;
+  iconUrl?: string;
+  iconPosition?: 'left' | 'right',
+  size?: 'lg' | 'md' | 'sm',
+  style?: 'primary' | 'secondary' | 'tertiary';
 };
 const Button = (props: ButtonProps) => {
   const {
-    style = 'primary',
-    size = 'medium',
+    children,
     text = 'Button',
     disabled = false,
-    // loading = false,
+    loading = false,
+    style = 'primary',
     onClick,
-    // icon,
-    // tooltip,
-    children
+    size = 'md',
+    tooltip,
+    iconUrl,
+    iconPosition = 'left',
   } = props;
 
-  const className = [styles.button].join(' ');
+  // Constructing button props
+  const classNameButtonArray = [styles.button, styles[style], styles[size]];
+  if (iconPosition === 'right') classNameButtonArray.push(styles.reverse);
+  if (loading) classNameButtonArray.push(styles.loading);
+  const classNameButton = classNameButtonArray.join(' ');
+  const htmlButtonProps = {
+    className: classNameButton,
+    onClick,
+    disabled: disabled || loading,
+    title: tooltip
+  };
 
-  const htmlButtonProps = {className, onClick, disabled};
+  // Constructing icon element
+  const classNameIconArray = [styles.icon, styles[size]];
+  if (disabled || loading) classNameIconArray.push(styles.disabled);
+  const classNameIcon = classNameIconArray.join(' ');
+  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>
 
   return (
     <>
-      <button {...htmlButtonProps}>{children ?? text}</button>
-      {/* <button>{children ?? text}</button> */}
+      <button {...htmlButtonProps}>{iconElement}{children ?? text}</button>
     </>
   )
 };

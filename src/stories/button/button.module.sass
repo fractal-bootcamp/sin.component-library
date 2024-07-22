@@ -1,4 +1,89 @@
 .button
   outline: none
   border: none
-  background-color: #aa7777
+  color: #f5f5fa
+  border-radius: 3px
+  cursor: pointer
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  gap: 4px
+  transition: background-color 150ms ease, color 150ms ease
+
+.button.reverse
+  flex-direction: row-reverse
+
+.button.loading
+  cursor: wait !important
+  filter: blur(1.5px)
+  
+.button:disabled
+  color: #f5f5fa88
+  cursor: not-allowed
+
+.primary
+  background-color: #4d3af2
+  
+.primary:disabled
+  background-color: #666285
+
+.primary:hover:enabled
+  background-color: #6151f5
+
+.primary:active:enabled
+  background-color: #7d6ffc
+
+.secondary
+  background-color: #626268
+
+.secondary:disabled
+  background-color: #505055
+
+.secondary:hover:enabled
+  background-color: #76767a
+
+.secondary:active:enabled
+  background-color: #8a8a91
+
+.tertiary
+  background-color: transparent
+
+.tertiary:hover:enabled
+  background-color: #f5f5fa1b
+
+.tertiary:active:enabled
+  background-color: #f5f5fa2c
+
+.button.sm
+  width: 80px
+  height: 26px
+  font-size: 12px
+
+.button.md
+  width: 120px
+  height: 38px
+  font-size: 14px
+
+.button.lg
+  width: 170px
+  height: 50px
+  font-size: 16px
+
+.icon
+  transition: opacity 150ms ease
+
+.icon.sm
+  width: 14px
+  height: 14px
+
+.icon.md
+  width: 18px
+  height: 18px
+
+.icon.lg
+  width: 22px
+  height: 22px
+
+.icon.disabled
+  opacity: 50%
