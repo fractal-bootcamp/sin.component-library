@@ -88,7 +88,7 @@ const Dropdown = (props: DropdownProps) => {
                 </div>
             }
             {/* make select checkboxes here */}
-            {isOpen && defaultDropdownType === 'CHECKBOX' &&
+            {isOpen && defaultDropdownType === DropdownSelectType.CHECKBOX &&
                 <div className="optionsContainer">
                     <ul style={props.listStyle} >
                         <input className="searchBar" type="text" placeholder="Search.." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
