@@ -1,4 +1,9 @@
+@import 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+  
 .button
+  font-family: "Barlow", sans-serif
+  font-weight: 400
+  position: relative
   outline: none
   border: none
   color: #f5f5fa
@@ -23,6 +28,7 @@
   cursor: not-allowed
 
 .primary
+  font-weight: 500
   background-color: #4d3af2
   
 .primary:disabled
@@ -87,3 +93,37 @@
 
 .icon.disabled
   opacity: 50%
+
+.loader
+  position: absolute
+  border-radius: 100%
+  box-sizing: border-box
+  animation: loader-rotate 2s ease-in-out infinite
+  cursor: wait
+
+.loader.sm
+  left: calc(50% - 10px)
+  top: calc(50% - 10px)
+  width: 20px
+  height: 20px
+  border: 4px dotted white
+
+.loader.md
+  left: calc(50% - 16px)
+  top: calc(50% - 16px)
+  width: 32px
+  height: 32px
+  border: 6px dotted white
+
+.loader.lg
+  left: calc(50% - 22px)
+  top: calc(50% - 22px)
+  width: 44px
+  height: 44px
+  border: 8px dotted white
+
+@keyframes loader-rotate
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)

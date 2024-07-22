@@ -18,6 +18,11 @@ const meta: Meta<typeof Button> = {
     iconUrl: {
       control: 'file'
     },
+    style: {
+      table: {
+        disable: true
+      }
+    }
   }
 };
 
@@ -33,7 +38,8 @@ const storyDefaults: Partial<ButtonProps> = {
 export const Primary: StoryObj<typeof Button> = {
   args: {
     ...storyDefaults,
-    style: "primary",
+    style: 'primary',
+    text: 'Primary'
   }
 };
 
@@ -41,6 +47,7 @@ export const Secondary: StoryObj<typeof Button> = {
   args: {
     ...storyDefaults,
     style: 'secondary',
+    text: 'Secondary'
   }
 };
 
@@ -48,6 +55,7 @@ export const Tertiary: StoryObj<typeof Button> = {
   args: {
     ...storyDefaults,
     style: 'tertiary',
+    text: 'Tertiary'
   }
 };
 

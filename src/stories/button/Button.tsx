@@ -42,13 +42,18 @@ const Button = (props: ButtonProps) => {
   const classNameIconArray = [styles.icon, styles[size]];
   if (disabled || loading) classNameIconArray.push(styles.disabled);
   const classNameIcon = classNameIconArray.join(' ');
-  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>
+  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>;
+
+  // Constructing loader element
+  const classNameLoader = `${styles.loader} ${styles[size]}`;
+  const loaderElement = loading ? <span className={classNameLoader} /> : <></>;
 
   return (
-    <>
+    <div>
       <button {...htmlButtonProps}>{iconElement}{children ?? text}</button>
-    </>
-  )
+      {loaderElement}
+    </div>
+  );
 };
 
 export default Button;
