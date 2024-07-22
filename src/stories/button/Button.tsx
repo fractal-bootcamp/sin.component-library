@@ -1,6 +1,6 @@
 import styles from './button.module.sass';
 
-interface ButtonProps {
+export interface ButtonProps {
   style?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium' | 'large';
   text?: string;

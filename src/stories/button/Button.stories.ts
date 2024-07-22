@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -23,63 +23,41 @@ const meta: Meta<typeof Button> = {
     icon: {
       control: 'file'
     },
-    width: {
-      description: 'Overrides size preset'
-    },
-    height: {
-      description: 'Overrides size preset'
-    }
   }
 };
+
+const storyDefaults: Partial<ButtonProps> = {
+  size: 'medium',
+  text: 'Primary',
+  disabled: false,
+  loading: false,
+  width: 0,
+  height: 0,
+  tooltip: '',
+  icon: '',
+  iconPosition: 'left',
+  iconWidth: 0,
+  iconHeight: 0,
+}
 
 export const Primary: StoryObj<typeof Button> = {
   args: {
     style: 'primary',
-    size: 'medium',
-    text: 'Primary',
-    disabled: false,
-    loading: false,
-    width: 0,
-    height: 0,
-    tooltip: '',
-    icon: '',
-    iconPosition: 'left',
-    iconWidth: 0,
-    iconHeight: 0,
+    ...storyDefaults
   }
 };
 
 export const Secondary: StoryObj<typeof Button> = {
   args: {
     style: 'secondary',
-    size: 'medium',
-    text: 'Secondary',
-    disabled: false,
-    loading: false,
-    width: 0,
-    height: 0,
-    tooltip: '',
-    icon: '',
-    iconPosition: 'left',
-    iconWidth: 0,
-    iconHeight: 0,
+    ...storyDefaults
   }
 };
 
 export const Tertiary: StoryObj<typeof Button> = {
   args: {
     style: 'tertiary',
-    size: 'medium',
-    text: 'Tertiary',
-    disabled: false,
-    loading: false,
-    width: 0,
-    height: 0,
-    tooltip: '',
-    icon: '',
-    iconPosition: 'left',
-    iconWidth: 0,
-    iconHeight: 0,
+    ...storyDefaults
   }
 };
 
