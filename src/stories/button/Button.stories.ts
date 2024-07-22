@@ -28,7 +28,7 @@ const storyDefaults: Partial<ButtonProps> = {
   tooltip: '',
   iconUrl: '',
   iconPosition: 'left',
-}
+};
 
 export const Primary: StoryObj<typeof Button> = {
   args: {
