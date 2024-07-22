@@ -1,0 +1,78 @@
+.test {
+  color: aqua;
+  background-color: aquamarine;
+}
+.dropdownContainer {
+  width: 200px;
+}
+
+.button {
+  color: black;
+  background-color: rgb(185, 192, 190);
+  border: solid 1px darkblue;
+  border-radius: 5px;
+  padding: 0px 10px 10px 10px;
+  width: fit-content;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.optionsContainer {
+  background-color: aliceblue;
+  width: 100%;
+}
+
+ul {
+  margin-top: 5px;
+  text-align: left;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px 15px 5px 15px;
+  position: relative;
+  // transition: all 1s;
+}
+li {
+  list-style: none;
+  padding-bottom: 5px;
+}
+li:hover {
+  cursor: pointer;
+  background-color: pink;
+}
+
+.arrowIconUp {
+  transform: scale(1);
+  position: relative;
+  top: 7px;
+  margin: 0;
+  padding: 0;
+  transition: all 3s;
+}
+.arrowIconUp:hover {
+  transform: rotate(180deg) scaleX(2);
+  background-color: aqua;
+  transition: all 1s;
+
+  // transform: scale(1);
+}
+.arrowIconUp::after {
+  transform: rotate(180deg) scaleX(0.5);
+  background-color: rgb(255, 0, 179);
+
+  transition: all 3s;
+}
+.arrowIconDown {
+  transform: scale(1);
+  position: relative;
+  top: 7px;
+  margin: 0;
+  padding: 0;
+  transform: rotate(180deg) scaleX(-1);
+  transition: all 3s;
+}
+
+.arrowIconDown::after {
+  transform: rotate(180deg) scaleX(0.5);
+  transition: all 3s;
+}
