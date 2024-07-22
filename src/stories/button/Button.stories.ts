@@ -5,11 +5,6 @@ import Button, { ButtonProps } from './Button';
 const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
-    style: {
-      table: {
-        disable: true
-      }
-    },
     onClick: {
       table: {
         disable: true
@@ -20,44 +15,39 @@ const meta: Meta<typeof Button> = {
         disable: true
       }
     },
-    icon: {
+    iconUrl: {
       control: 'file'
     },
   }
 };
 
 const storyDefaults: Partial<ButtonProps> = {
-  size: 'medium',
-  text: 'Primary',
   disabled: false,
   loading: false,
-  width: 0,
-  height: 0,
+  size: 'md',
   tooltip: '',
-  icon: '',
+  iconUrl: '',
   iconPosition: 'left',
-  iconWidth: 0,
-  iconHeight: 0,
 }
 
 export const Primary: StoryObj<typeof Button> = {
   args: {
-    style: 'primary',
-    ...storyDefaults
+    ...storyDefaults,
+    style: "primary",
   }
 };
 
 export const Secondary: StoryObj<typeof Button> = {
   args: {
+    ...storyDefaults,
     style: 'secondary',
-    ...storyDefaults
   }
 };
 
 export const Tertiary: StoryObj<typeof Button> = {
   args: {
+    ...storyDefaults,
     style: 'tertiary',
-    ...storyDefaults
   }
 };
 
