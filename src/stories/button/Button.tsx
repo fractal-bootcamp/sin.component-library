@@ -18,16 +18,16 @@ interface ButtonProps {
 };
 const Button = (props: ButtonProps) => {
   const {
+    children,
     style = 'primary',
     size = 'medium',
     text = 'Button',
     disabled = false,
     loading = false,
     onClick,
-    tooltip,
-    children,
     height,
     width,
+    tooltip,
     icon,
     iconPosition = 'left',
     iconWidth,
