@@ -1,2 +1,4 @@
-.storybook-textInput {
+.storybook-textInput textarea::placeholder {
+  text-align: center;
+  transform: translateY(90px) translateX(-30px);
 }

@@ -5,9 +5,9 @@ function App() {
   return (
     <>
       <TextInput
-        placeholder="     Enter your text"
+        placeholder="Enter your text"
         isDisabled={false}
-        isPassword={false}
+        isPassword={true}
       ></TextInput>
     </>
   );

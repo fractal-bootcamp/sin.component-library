@@ -1,4 +1,4 @@
-//import "./textInput.css";
+import "./textinput.css";
 import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
@@ -6,46 +6,51 @@ import TitleIcon from "@mui/icons-material/Title";
 interface TextInputProps {
   placeholder: string;
   isDisabled: boolean;
-  //isPassword: boolean;
+  isPassword: boolean;
   //prefixIcon: React.ReactNode; //likely an icon in a div
   //suffixIcon: React.ReactNode; //likely an icon in a div
 }
 
+//make a style change conditional on the value of a pro
+
 const TextInput = ({
   placeholder,
   isDisabled,
-  //isPassword,
+  isPassword,
   //prefixIcon,
   //suffixIcon,
 }: TextInputProps) => {
   const [value, setValue] = useState("");
   const isValid = !/[0-9]/.test(value); //derived state
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(e.target.value);
+    setValue(e.target.value); //problem here
+  };
+
+  const displayValue = isPassword ? "•".repeat(value.length) : value;
+
   return (
-    <div
-      style={{
-        border: "1px solid black",
-        display: "flex",
-        width: "max-content",
-      }}
-    >
-      <TitleIcon />
+    <div style={{ display: "flex" }} className="storybook-textInput">
+      <TitleIcon style={{ paddingBottom: "180px", zIndex: 1 }} />
       <textarea
-        //type={isPassword ? "password" : "text"}
-        value={value}
+        value={displayValue}
         placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         disabled={isDisabled}
         className={`${isValid ? "bg-green-500" : "bg-red-500"}`}
         style={{
           width: "200px",
           height: "200px",
-          lineHeight: "36px",
+          marginLeft: "-25px",
+          textIndent: "25px",
+          lineHeight: "30px",
         }}
       />
       <KeyboardReturnIcon
         style={{ marginLeft: "-30px", paddingTop: "180px" }}
       />
+      <button onClick={() => console.log(value)}>test</button>
     </div>
   );
 };
@@ -67,7 +72,3 @@ export default TextInput;
 // - Focus animation with border color change and slight shadow. (in progress)
 
 // - Shake animation on validation error. (in progress)
-
-// - Why props?
-// - If we use props, how does it make sense that we have to pass the placeholdername into props? (perhaps it does make sebse)
-//
