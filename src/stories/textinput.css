@@ -2,3 +2,37 @@
   text-align: center;
   transform: translateY(90px) translateX(-30px);
 }
+
+/* Focus animation with border color change and slight shadow */
+.storybook-textInput textarea {
+  border: 2px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.storybook-textInput textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  outline: none;
+}
+
+/* Shake animation for validation error */
+/* Counts from 0 to 100%, alternating between positive and negative translation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(1px);
+  }
+}

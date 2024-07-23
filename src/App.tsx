@@ -1,4 +1,3 @@
-import { Page } from "./stories/Page";
 import TextInput from "./stories/TextInput";
 
 function App() {
@@ -8,6 +7,7 @@ function App() {
         placeholder="Enter your text"
         isDisabled={false}
         isPassword={true}
+        validationRegex={/^[a-zA-Z0-9]+$/}
       ></TextInput>
     </>
   );
