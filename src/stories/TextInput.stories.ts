@@ -13,7 +13,7 @@ export const Default: Story = {
     placeholder: "Enter your text",
     isDisabled: false,
     isPassword: false,
-    validationRegex: /^[a-zA-Z0-9]+$/,
+    validationRegex: "^[a-zA-Z0-9]+$",
   },
 };
 
@@ -22,7 +22,7 @@ export const Disabled: Story = {
     placeholder: "Enter your text",
     isDisabled: true,
     isPassword: false,
-    validationRegex: /^[a-zA-Z0-9]+$/,
+    validationRegex: "^[a-zA-Z0-9]+$",
   },
 };
 
@@ -31,6 +31,6 @@ export const Password: Story = {
     placeholder: "Enter your password",
     isDisabled: false,
     isPassword: true,
-    validationRegex: /^[a-zA-Z0-9]+$/,
+    validationRegex: "^[a-zA-Z0-9]+$",
   },
 };
