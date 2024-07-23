@@ -1,0 +1,129 @@
+@import 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+  
+.button
+  font-family: "Barlow", sans-serif
+  font-weight: 400
+  position: relative
+  outline: none
+  border: none
+  color: #f5f5fa
+  border-radius: 3px
+  cursor: pointer
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  gap: 4px
+  transition: background-color 150ms ease, color 150ms ease
+
+.button.reverse
+  flex-direction: row-reverse
+
+.button.loading
+  cursor: wait !important
+  filter: blur(1.5px)
+  
+.button:disabled
+  color: #f5f5fa88
+  cursor: not-allowed
+
+.primary
+  font-weight: 500
+  background-color: #4d3af2
+  
+.primary:disabled
+  background-color: #666285
+
+.primary:hover:enabled
+  background-color: #6151f5
+
+.primary:active:enabled
+  background-color: #7d6ffc
+
+.secondary
+  background-color: #626268
+
+.secondary:disabled
+  background-color: #505055
+
+.secondary:hover:enabled
+  background-color: #76767a
+
+.secondary:active:enabled
+  background-color: #8a8a91
+
+.tertiary
+  background-color: transparent
+
+.tertiary:hover:enabled
+  background-color: #f5f5fa1b
+
+.tertiary:active:enabled
+  background-color: #f5f5fa2c
+
+.button.sm
+  width: 80px
+  height: 26px
+  font-size: 12px
+
+.button.md
+  width: 120px
+  height: 38px
+  font-size: 14px
+
+.button.lg
+  width: 170px
+  height: 50px
+  font-size: 16px
+
+.icon
+  transition: opacity 150ms ease
+
+.icon.sm
+  width: 14px
+  height: 14px
+
+.icon.md
+  width: 18px
+  height: 18px
+
+.icon.lg
+  width: 22px
+  height: 22px
+
+.icon.disabled
+  opacity: 50%
+
+.loader
+  position: absolute
+  border-radius: 100%
+  box-sizing: border-box
+  animation: loader-rotate 2s ease-in-out infinite
+  cursor: wait
+
+.loader.sm
+  left: calc(50% - 10px)
+  top: calc(50% - 10px)
+  width: 20px
+  height: 20px
+  border: 4px dotted white
+
+.loader.md
+  left: calc(50% - 16px)
+  top: calc(50% - 16px)
+  width: 32px
+  height: 32px
+  border: 6px dotted white
+
+.loader.lg
+  left: calc(50% - 22px)
+  top: calc(50% - 22px)
+  width: 44px
+  height: 44px
+  border: 8px dotted white
+
+@keyframes loader-rotate
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
