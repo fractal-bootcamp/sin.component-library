@@ -27,10 +27,12 @@ const Button = (props: ButtonProps) => {
   } = props;
 
   // Constructing button props
-  const classNameButtonArray = [styles.button, styles[style], styles[size]];
-  if (iconPosition === 'right') classNameButtonArray.push(styles.reverse);
-  if (loading) classNameButtonArray.push(styles.loading);
-  const classNameButton = classNameButtonArray.join(' ');
+  const classNameButton = [
+    styles.button, styles[style], styles[size],
+    iconPosition === 'right' && styles.reverse,
+    loading && styles.loading
+  ].filter(x => x !== false)
+    .join(' ');
   const htmlButtonProps = {
     className: classNameButton,
     onClick,
@@ -39,9 +41,11 @@ const Button = (props: ButtonProps) => {
   };
 
   // Constructing icon element
-  const classNameIconArray = [styles.icon, styles[size]];
-  if (disabled || loading) classNameIconArray.push(styles.disabled);
-  const classNameIcon = classNameIconArray.join(' ');
+  const classNameIcon = [
+    styles.icon, styles[size],
+    (disabled || loading) && styles.disabled
+  ].filter(x => x !== false)
+    .join(' ');
   const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>;
 
   // Constructing loader element
