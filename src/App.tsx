@@ -5,8 +5,8 @@ function App() {
     <>
       <TextInput
         placeholder="Enter your text"
-        isDisabled={false}
-        isPassword={true}
+        isDisabled={true}
+        isPassword={false}
         validationRegex={/^[a-zA-Z0-9]+$/}
       ></TextInput>
     </>

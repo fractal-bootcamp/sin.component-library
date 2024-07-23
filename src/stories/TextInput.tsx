@@ -62,54 +62,83 @@ const TextInput = ({
     }
   };
 
-  return (
-    <div style={{ display: "flex" }} className="storybook-textInput">
-      <TitleIcon style={{ paddingBottom: "180px", zIndex: 1 }} />
-      <textarea
-        value={displayValue}
-        placeholder={placeholder}
-        onChange={handleChange}
-        disabled={isDisabled}
-        style={{
-          width: "200px",
-          height: "200px",
-          marginLeft: "-25px",
-          textIndent: "25px",
-          lineHeight: "30px",
-          color: isValid ? "green" : "red",
-          animation: isValid ? "none" : "shake 0.75s ",
-          resize: "none",
-        }}
-      />
+  if (isDisabled) {
+    return (
+      <div style={{ display: "flex" }} className="storybook-textInput">
+        <TitleIcon style={{ paddingBottom: "180px", zIndex: 1 }} />
+        <textarea
+          onChange={handleChange}
+          disabled={isDisabled}
+          style={{
+            width: "200px",
+            height: "200px",
+            marginLeft: "-25px",
+          }}
+        />
+        <KeyboardReturnIcon
+          style={{
+            marginLeft: "-30px",
+            marginTop: "180px",
+            color: "black",
+          }}
+        />
+        <InfoIcon
+          style={{
+            marginLeft: "-20px",
+            color: "black",
+          }}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div style={{ display: "flex" }} className="storybook-textInput">
+        <TitleIcon style={{ paddingBottom: "180px", zIndex: 1 }} />
+        <textarea
+          value={displayValue}
+          placeholder={placeholder}
+          onChange={handleChange}
+          style={{
+            width: "200px",
+            height: "200px",
+            marginLeft: "-25px",
+            textIndent: "25px",
+            lineHeight: "30px",
+            color: isValid ? "green" : "red",
+            animation: isValid ? "none" : "shake 0.75s ",
+            resize: "none",
+          }}
+        />
 
-      <KeyboardReturnIcon
-        style={{
-          marginLeft: "-30px",
-          marginTop: "180px",
-          color: submitHover ? "lightblue" : "black",
-          transform: submitMouseDown ? "scale(0.9)" : "scale(1)",
-        }}
-        onClick={() => console.log(realValue)}
-        onMouseEnter={() => setSubmitHover(true)}
-        onMouseLeave={() => setSubmitHover(false)}
-        onMouseDown={() => setSubmitMouseDown(true)}
-        onMouseUp={() => setSubmitMouseDown(false)}
-      />
+        <KeyboardReturnIcon
+          style={{
+            marginLeft: "-30px",
+            marginTop: "180px",
+            color: submitHover ? "lightblue" : "black",
+            transform: submitMouseDown ? "scale(0.9)" : "scale(1)",
+          }}
+          onClick={() => console.log(realValue)}
+          onMouseEnter={() => setSubmitHover(true)}
+          onMouseLeave={() => setSubmitHover(false)}
+          onMouseDown={() => setSubmitMouseDown(true)}
+          onMouseUp={() => setSubmitMouseDown(false)}
+        />
 
-      <InfoIcon
-        style={{
-          marginLeft: "-20px",
-          color: infoHover ? "lightblue" : "black",
-          transform: infoMouseDown ? "scale(0.9)" : "scale(1)",
-        }}
-        onClick={() => console.log("Info")}
-        onMouseEnter={() => setInfoHover(true)}
-        onMouseLeave={() => setInfoHover(false)}
-        onMouseDown={() => setInfoMouseDown(true)}
-        onMouseUp={() => setInfoMouseDown(false)}
-      />
-    </div>
-  );
+        <InfoIcon
+          style={{
+            marginLeft: "-20px",
+            color: infoHover ? "lightblue" : "black",
+            transform: infoMouseDown ? "scale(0.9)" : "scale(1)",
+          }}
+          onClick={() => console.log("Info")}
+          onMouseEnter={() => setInfoHover(true)}
+          onMouseLeave={() => setInfoHover(false)}
+          onMouseDown={() => setInfoMouseDown(true)}
+          onMouseUp={() => setInfoMouseDown(false)}
+        />
+      </div>
+    );
+  }
 };
 
 export default TextInput;
