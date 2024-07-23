@@ -46,11 +46,11 @@ const Button = (props: ButtonProps) => {
     (disabled || loading) && styles.disabled
   ].filter(x => x !== false)
     .join(' ');
-  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : <></>;
+  const iconElement = iconUrl ? <img className={classNameIcon} src={iconUrl}/> : null;
 
   // Constructing loader element
   const classNameLoader = `${styles.loader} ${styles[size]}`;
-  const loaderElement = loading ? <span className={classNameLoader} /> : <></>;
+  const loaderElement = loading ? <span className={classNameLoader} /> : null;
 
   return (
     <div>
