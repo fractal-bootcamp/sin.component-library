@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./rating.scss"; // Assuming you have a Sass file for styling
 
 
@@ -11,22 +11,17 @@ export interface RatingProps {
 }
 
 const Rating: React.FC<RatingProps> = ({
-    totalStars = 5,
-    shape,
+    totalStars,
+    shape = '\u2605',
     disabled = false,
-    readOnly,
-    readOnlyValue = totalStars
+    readOnly = false,
+    readOnlyValue = 5
 }) => {
+    const defaultRating = readOnly ? readOnlyValue : 0;
+
     const numberOfStars = totalStars
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(defaultRating);
     const [hoveredRating, setHoveredRating] = useState(0);
-
-
-    useEffect(() => {
-        if (readOnly) {
-            setRating(readOnlyValue)
-        }
-    }, [])
 
     const handleStarClick = () => {
         if (!disabled && !readOnly) {
@@ -35,10 +30,10 @@ const Rating: React.FC<RatingProps> = ({
         }
     };
 
-    const handleStarHover = (e, index) => {
+    const handleStarHover = (e: React.MouseEvent<HTMLSpanElement>, index: number) => {
         if (!disabled && !readOnly) {
-            const starWidth = e.target.offsetWidth;
-            const mouseX = e.clientX - e.target.getBoundingClientRect().left;
+            const starWidth = (e.target as HTMLSpanElement).offsetWidth;
+            const mouseX = e.clientX - (e.target as HTMLSpanElement).getBoundingClientRect().left;
             const hoverWidth = (mouseX / starWidth) * 100;
 
             // Round hoverWidth to nearest 10 for more predictable behavior
@@ -59,14 +54,6 @@ const Rating: React.FC<RatingProps> = ({
         }
     };
 
-    const renderSymbol = (content: string) => {
-        return (
-            <span>{content}</span>
-        );
-    };
-    const symbolElement = renderSymbol(shape);
-
-
     return (
         <>
             <h1> Rating {rating}</h1>
@@ -78,7 +65,7 @@ const Rating: React.FC<RatingProps> = ({
                             <input
                                 type="radio"
                                 name="rating"
-                                onClick={() => handleStarClick(index)}
+                                onClick={() => handleStarClick()}
                             />
                             <span
                                 onMouseMove={(e) => handleStarHover(e, index)}
@@ -88,8 +75,7 @@ const Rating: React.FC<RatingProps> = ({
                                     color: index < rating ? "yellow" : "transparent"
                                 }}
                             >
-                                {symbolElement}
-
+                                {shape}
                             </span>
                         </label>
                     ))}
@@ -101,7 +87,7 @@ const Rating: React.FC<RatingProps> = ({
                             <input
                                 type="radio"
                                 name="rating"
-                                onClick={() => handleStarClick(index)}
+                                onClick={() => handleStarClick()}
                             />
                             <span
                                 onMouseMove={(e) => handleStarHover(e, index)}
@@ -111,7 +97,7 @@ const Rating: React.FC<RatingProps> = ({
                                 }}
                                 className={`${hoveredRating + .5 == (index + 1) ? 'halfstar' : 'star'}`}
                             >
-                                {symbolElement}
+                                {shape}
                             </span>
                         </label>
                     ))}
