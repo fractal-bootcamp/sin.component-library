@@ -4,24 +4,28 @@ input[type="radio"] {
 
 .star {
   cursor: pointer;
-  font-size: 2rem;
-  margin: 5px;
+  font-size: 3rem;
   color: transparent;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
-.star.hovered,
-.star.hovered ~ .star {
-  color: #ffc107 !important; /* Color for hovered and preceding stars */
-}
 
 .halfstar {
-  cursor: pointer;
-  font-size: 2rem;
+  @extend .star;
+  background: linear-gradient(to right, yellow 50%, transparent 50%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important; /* Hide the text initially */
+}
+.container {
   position: relative;
-  display: inline-block; /* Ensure inline-block for width calculation */
-  background: linear-gradient(to right, yellow 50%, transparent 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent; /* Hide the text initially */
+  display: flex;
+  align-items: center;
+}
+
+.realstarsdiv,
+.hoveredStars {
+  position: absolute;
+  display: flex; /* Ensure stars are laid out in a row */
+  gap: 5px; /* Adjust gap between stars */
 }
