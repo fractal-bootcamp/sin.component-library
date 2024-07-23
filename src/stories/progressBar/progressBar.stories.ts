@@ -9,5 +9,28 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    backgroundColor: "red",
+    progressColor: "green",
+    linearOrCircular: "linear",
+    isStriped: false,
+  },
+};
+
+export const Circular: Story = {
+  args: {
+    backgroundColor: "red",
+    progressColor: "green",
+    linearOrCircular: "circular",
+    isStriped: false,
+  },
+};
+
+export const Striped: Story = {
+  args: {
+    backgroundColor: "red",
+    progressColor: "green",
+    linearOrCircular: "linear",
+    isStriped: true,
+  },
 };
