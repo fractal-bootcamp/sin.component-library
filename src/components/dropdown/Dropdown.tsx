@@ -1,54 +1,78 @@
-import { useEffect, useState } from "react"
-import "./dropdown.scss"
+import React, { useState, useEffect } from "react";
+import "./dropdown.scss";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
 
 export enum DropdownSelectType {
     CHECKBOX = 'CHECKBOX',
     LIST = 'LIST',
 }
+
 export interface DropdownProps {
     options: { label: string, value: string }[];
     defaultText: string;
     type?: DropdownSelectType;
-    boxStyle?: {};
-    listStyle?: {};
+    boxStyle?: React.CSSProperties;
+    listStyle?: React.CSSProperties;
     disabled?: boolean;
 }
 
-const Dropdown = (props: DropdownProps) => {
-    // Set default to list if no style selected
-    let defaultDropdownType: DropdownSelectType = props.type as DropdownSelectType || DropdownSelectType.LIST;
+const Dropdown: React.FC<DropdownProps> = ({
+    options,
+    defaultText,
+    type = DropdownSelectType.LIST,
+    boxStyle,
+    listStyle,
+    disabled = false
+}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [text, setText] = useState(defaultText)
 
-    const [isOpen, setIsOpen] = useState(true)
-    const [selectedOption, setSelectedOption] = useState(props.defaultText)
-
-    const updateSelection = (e: React.MouseEvent<HTMLLIElement>) => {
-        // console.log(e.target.value)
-        if (e.target instanceof HTMLElement) {
-            const targetVal = e.target.getAttribute('value')
-            console.log(targetVal)
-            setSelectedOption(e.target.textContent || '')
-            setIsOpen(false)
+    const toggleDropdown = () => {
+        if (!disabled) {
+            setIsOpen(!isOpen);
         }
-    }
+    };
 
     useEffect(() => {
-        setIsOpen(false)
-    }, [])
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // console.log(e.currentTarget.value)
-        setSearchQuery('')
-        setIsOpen(!isOpen)
-    }
+        if (type === DropdownSelectType.LIST) {
+            setText(selectedOptions.length ? selectedOptions[0] : defaultText)
+        }
+
+
+    }, [selectedOptions])
+
+    const updateSelection = (option: { label: string, value: string }) => {
+        if (type === DropdownSelectType.CHECKBOX) {
+            const selectedIndex = selectedOptions.indexOf(option.value);
+            if (selectedIndex === -1) {
+                setSelectedOptions([...selectedOptions, option.value]);
+            } else {
+                setSelectedOptions(selectedOptions.filter(item => item !== option.value));
+            }
+        } else {
+            setSelectedOptions([option.value]);
+            setIsOpen(false);
+        }
+    };
 
     const clearSelection = () => {
-        setSelectedOption(props.defaultText)
-        setSearchQuery('')
-        setIsOpen(false)
-    }
+        setSelectedOptions([]);
+        setSearchQuery('');
+        setIsOpen(false);
+    };
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
+    const handleCheckboxChange = (option: { label: string, value: string }) => {
+        const selectedIndex = selectedOptions.indexOf(option.value);
+        if (selectedIndex === -1) {
+            setSelectedOptions([...selectedOptions, option.value]);
+        } else {
+            setSelectedOptions(selectedOptions.filter(item => item !== option.value));
+        }
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
         // Allow users to click enter to select option
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -59,52 +83,37 @@ const Dropdown = (props: DropdownProps) => {
         }
     };
 
-    const [searchQuery, setSearchQuery] = useState('')
-    const filteredOptions = props.options.filter(option => option.label.toLowerCase().includes(searchQuery.toLowerCase()))
+    const filteredOptions = options.filter(option => option.label.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    // handle logic for checkboxes
-    const clearCheckboxes = () => {
-        const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach((checkbox: HTMLInputElement) => {
-            checkbox.checked = false;
-        });
-        setSearchQuery('')
-    }
+    useEffect(() => {
+        setIsOpen(false);
+    }, []);
 
-    return <>
-        {/* make default view, nothing selected */}
+    return (
         <div className="dropdownContainer">
-            <button style={props.boxStyle} value={selectedOption} className='button' onClick={(e) => { !props.disabled && handleClick(e) }}>{selectedOption} <KeyboardArrowUpIcon className={isOpen ? "arrowIconDown" : "arrowIconUp"} /> </button>
-            {/* make list of select items */}
-            {isOpen && defaultDropdownType === DropdownSelectType.LIST &&
+            <button style={boxStyle} className='button' onClick={toggleDropdown}>
+                {text} <KeyboardArrowUpIcon className={isOpen ? "arrowIconDown" : "arrowIconUp"} />
+            </button>
+            {isOpen && (
                 <div className="optionsContainer">
-                    <ul style={props.listStyle} onKeyDown={handleKeyDown}>
+                    <ul style={listStyle} onKeyDown={handleKeyDown}>
                         <input className="searchBar" type="text" placeholder="Search.." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-                        <li key={0} tabIndex={0} onClick={clearSelection} value={props.defaultText}>Clear selection</li>
-                        {filteredOptions.map((option, idx) => {
-                            return <li key={idx + 1} tabIndex={0} onSelect={updateSelection} onClick={updateSelection} value={option.value}>{option.label}</li>
-                        })}
-                    </ul>
-                </div>
-            }
-            {/* make select checkboxes here */}
-            {isOpen && defaultDropdownType === DropdownSelectType.CHECKBOX &&
-                <div className="optionsContainer">
-                    <ul style={props.listStyle} >
-                        <input className="searchBar" type="text" placeholder="Search.." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-                        <li key={0} value={props.defaultText} onClick={clearCheckboxes}>
+                        <li key={0} tabIndex={0} onClick={clearSelection} >
                             Clear selection
                         </li>
-                        {filteredOptions.map((option, idx) => {
-                            return <li key={idx + 1} value={option.value}>
-                                <input type="checkbox" />
-                                {option.label}</li>
-                        })}
+                        {filteredOptions.map((option, idx) => (
+                            <li key={idx + 1} tabIndex={0} onClick={() => updateSelection(option)} value={option.value}>
+                                {type === DropdownSelectType.CHECKBOX && (
+                                    <input type="checkbox" checked={selectedOptions.includes(option.value)} onChange={() => handleCheckboxChange(option)} onClick={(e) => e.stopPropagation()} />
+                                )}
+                                {option.label}
+                            </li>
+                        ))}
                     </ul>
                 </div>
-            }
+            )}
         </div>
-    </>
-}
+    );
+};
 
-export default Dropdown
+export default Dropdown;
