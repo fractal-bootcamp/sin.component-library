@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Choose a suitable font stack */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   opacity: 0;
 
   animation: slide-in 0.5s forwards;
@@ -63,9 +63,19 @@
   border: 1px solid #f5c6cb;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
+.dismiss-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.dismiss-button:hover {
+  color: #ff5555; /* Change color on hover */
 }
 
 @keyframes slide-in {
