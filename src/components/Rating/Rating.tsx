@@ -24,30 +24,32 @@ const Rating: React.FC<RatingProps> = ({
     const [hoveredRating, setHoveredRating] = useState(0);
 
     const handleStarClick = () => {
+        console.log(hoveredRating)
         if (!disabled && !readOnly) {
-            setRating(hoveredRating);
-
+            if (hoveredRating > 0)
+                setRating(hoveredRating);
         }
     };
-
     const handleStarHover = (e: React.MouseEvent<HTMLSpanElement>, index: number) => {
         if (!disabled && !readOnly) {
-            const starWidth = (e.target as HTMLSpanElement).offsetWidth;
-            const mouseX = e.clientX - (e.target as HTMLSpanElement).getBoundingClientRect().left;
+            const starWidth = (e.currentTarget as HTMLSpanElement).offsetWidth;
+            const mouseX = e.pageX - (e.currentTarget as HTMLSpanElement).getBoundingClientRect().left;
             const hoverWidth = (mouseX / starWidth) * 100;
 
             // Round hoverWidth to nearest 10 for more predictable behavior
             const roundedHoverWidth = Math.round(hoverWidth / 10) * 10;
+
             // Determine hoveredRating based on hoverWidth
-            if (roundedHoverWidth < 25) {
+            if (roundedHoverWidth > 0 && roundedHoverWidth < 50) {
                 setHoveredRating(index + 0.5);
-            } else if (roundedHoverWidth >= 25 && roundedHoverWidth < 75) {
+            } else if (roundedHoverWidth >= 50 && roundedHoverWidth <= 100) {
                 setHoveredRating(index + 1);
-            } else {
-                setHoveredRating(index + 1.5);
             }
         }
     };
+
+
+
     const handleStarLeave = () => {
         if (!disabled) {
             setHoveredRating(0);
