@@ -24,7 +24,6 @@ const Rating: React.FC<RatingProps> = ({
     const [hoveredRating, setHoveredRating] = useState(0);
 
     const handleStarClick = () => {
-        console.log(hoveredRating)
         if (!disabled && !readOnly) {
             if (hoveredRating > 0)
                 setRating(hoveredRating);
