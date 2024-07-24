@@ -31,7 +31,7 @@ const Alert: React.FC<AlertProps> = ({
         // Create a new alert object
         const newAlert = {
             id: Date.now(),
-            message: message + Date.now(),
+            message: message,
             show: true,
             type: type
         };
