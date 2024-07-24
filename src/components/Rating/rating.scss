@@ -6,7 +6,7 @@ input[type="radio"] {
   cursor: pointer;
   font-size: 3rem;
   color: transparent;
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: black;
 }
 
@@ -15,8 +15,9 @@ input[type="radio"] {
   background: linear-gradient(to right, yellow 50%, transparent 50%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
-  color: transparent !important; /* Hide the text initially */
+  color: transparent !important;
 }
+
 .container {
   position: relative;
   display: flex;
