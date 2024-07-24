@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./rating.scss"; // Assuming you have a Sass file for styling
+import "./rating.scss";
 
 
 export interface RatingProps {
@@ -47,8 +47,6 @@ const Rating: React.FC<RatingProps> = ({
         }
     };
 
-
-
     const handleStarLeave = () => {
         if (!disabled) {
             setHoveredRating(0);
@@ -69,8 +67,6 @@ const Rating: React.FC<RatingProps> = ({
                                 onClick={() => handleStarClick()}
                             />
                             <span
-                                onMouseMove={(e) => handleStarHover(e, index)}
-                                onMouseLeave={handleStarLeave}
                                 className={`${rating + .5 == (index + 1) ? 'halfstar' : 'star'}`}
                                 style={{
                                     color: index < rating ? "yellow" : "transparent"
@@ -93,10 +89,10 @@ const Rating: React.FC<RatingProps> = ({
                             <span
                                 onMouseMove={(e) => handleStarHover(e, index)}
                                 onMouseLeave={handleStarLeave}
+                                className={`${hoveredRating + .5 == (index + 1) ? 'halfstar' : 'star'}`}
                                 style={{
                                     color: index < hoveredRating ? "yellow" : "transparent"
                                 }}
-                                className={`${hoveredRating + .5 == (index + 1) ? 'halfstar' : 'star'}`}
                             >
                                 {shape}
                             </span>
