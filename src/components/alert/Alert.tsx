@@ -19,33 +19,36 @@ export type AlertProps = {
 const Alert: React.FC<AlertProps> = ({
     type = TypeEnum.WARNING,
     message,
-    dismissible = true,
+    dismissible = false,
     timeout = 3000,
-    displayMultiple = false
+    displayMultiple = true
 }) => {
     const [alerts, setAlerts] = useState<{ id: number, message: string, show: boolean, type: TypeEnum }[]>([]);
     const showNewToast = () => {
         if (!displayMultiple && alerts.length > 0) {
             handleDismiss(alerts[0].id);
         }
-
+        // Create a new alert object
         const newAlert = {
             id: Date.now(),
             message: message + Date.now(),
             show: true,
             type: type
         };
-
+        // Add the new alert to the beginning of the alerts array
         setAlerts(prevAlerts => [newAlert, ...prevAlerts]);
 
+        // If the alert is not dismissible, set a timeout to dismiss it after timeout duration
         if (!dismissible) {
             setTimeout(() => handleDismiss(newAlert.id), timeout);
         }
     };
 
+    // Function to dismiss an alert
     const handleDismiss = (id: number) => {
+        // Update the show property of the alert to false
         setAlerts(prevAlerts => prevAlerts.map(alert => alert.id === id ? { ...alert, show: false } : alert));
-
+        // After a delay, remove the alert from the alerts array
         setTimeout(() => {
             setAlerts(prevAlerts => prevAlerts.filter(alert => alert.id !== id));
         }, 400);
@@ -55,7 +58,7 @@ const Alert: React.FC<AlertProps> = ({
         <>
             <button onClick={showNewToast}>Show Toast</button>
             <div className="toast-container">
-                {alerts.map((alert, index) => (
+                {alerts.map((alert) => (
                     <div key={alert.id} className={`${alert.type.toLowerCase()} toast ${alert.show ? 'show' : 'slide-out'}`}>
                         <span className="toast-text">{alert.message}</span>
                         {dismissible && (
