@@ -1,5 +1,5 @@
 import React from 'react';
-import './skeleton.styles.scss'; // Assuming you have a Sass file for styling
+import './skeleton.styles.scss';
 
 const NavbarSkeleton: React.FC = () => {
     return (
