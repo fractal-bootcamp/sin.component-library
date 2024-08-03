@@ -8,7 +8,7 @@ type AccordionProps = {
 
 function parseContent(content: string | AccordionProps[]): React.ReactNode {
   if (typeof content === 'string') return <p>{content}</p>
-  else return content.map(x => Accordion(x));
+  else return content.map(x => <Accordion {...x} />);
 }
 
 export default function Accordion(props: AccordionProps) {
